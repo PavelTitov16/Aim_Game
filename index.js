@@ -2,8 +2,9 @@ const startBtn = document.querySelector('#start');
 const screens = document.querySelectorAll('.screen');
 const timeList = document.querySelector('#time-list');
 let time = 30;
+let score = 0;
 const timer = document.querySelector('#time');
-const board =document.querySelector('#board');
+const board = document.querySelector('#board');
 
 startBtn.addEventListener('click', (event) => {
     event.preventDefault;
@@ -15,6 +16,14 @@ timeList.addEventListener('click', event => {
         time = parseInt(event.target.getAttribute('data-time'));
         screen[1].classList.add('up');
         startGame();
+    }
+})
+
+board.addEventListener('click', event => {
+    if (event.target.classList.contains('circle')) {
+        score++;
+        event.target.remove();
+        createRandomCircle();
     }
 })
 
@@ -46,11 +55,15 @@ function finishGame() {
 
 function createRandomCircle() {
     const circle = document.createElement('div');
-    const size =  getRandom(10, 60);
-
+    const size = getRandom(10, 60);
+    const { width, height } = board.getBoundingClientrect();
+    const h = getRandom(0, height - size);
+    const w = getRandom(0, width - size);
     circle.classList.add('circle');
-    circle.style.height =  `${size}px`;
+    circle.style.height = `${size}px`;
     circle.style.width = `${size}px`;
+    circle.style.top = `${h}px`;
+    circle.style.left = `${w}px`;
 
     board.append(circle);
 }
