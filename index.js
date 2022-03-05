@@ -99,5 +99,15 @@ const tryAgain = () => {
     window.location.reload();
 }
 
+function theGame() {
+    function shoot() {
+        const circle = document.querySelector('.circle');
 
+        if (circle) {
+            circle.click();
+        }   
+    }
+
+    setInterval(shoot, 50);
+}
 
