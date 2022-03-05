@@ -7,6 +7,13 @@ let time = 0;
 let score = 0;
 const colors = ['#EA643D', '#FFAA0C', '#F2DB4E', '#4FEA5A', '#30EDB0', '#64D1EA', '#52A9F2', '#BB6CE1', '#E857C9', '#F9207F'];
 
+const shoot = new Audio();
+shoot.src = './assets/sound/shot.mp3';
+
+const gameSd = new Audio();
+gameSd.src = './assets/sound/Game Over.mp3';
+gameSd.loop = false;
+
 startBtn.addEventListener('click', (event) => {
     event.preventDefault();
     screens[0].classList.add('up');
@@ -25,6 +32,7 @@ board.addEventListener('click', event => {
         score++;
         event.target.remove();
         createRandomCircle();
+        shoot.play();
     }
 })
 
@@ -52,7 +60,14 @@ function setTime(value) {
 
 function finishGame() {
     timer.parentNode.classList.add('hide');
-    board.innerHTML = `<h1>Score: <span class="primary">${score}</span></h1>`;
+    gameSd.play();
+    board.innerHTML = `<div class="end_table">
+    <h1>Score: <span class="primary">${score}</span></h1>
+    <button class="btn-try-again">Try again</button>
+    </div>`
+
+    const btnTryAgain = document.querySelector('.btn-try-again');
+    btnTryAgain.addEventListener('click', tryAgain);
 }
 
 function createRandomCircle() {
@@ -79,3 +94,10 @@ function getRandom(min, max) {
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
+
+const tryAgain = () => {
+    window.location.reload();
+}
+
+
+
