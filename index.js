@@ -8,10 +8,10 @@ let score = 0;
 const colors = ['#EA643D', '#FFAA0C', '#F2DB4E', '#4FEA5A', '#30EDB0', '#64D1EA', '#52A9F2', '#BB6CE1', '#E857C9', '#F9207F'];
 
 const shoot = new Audio();
-shoot.src = './assets/sound/shot.mp3';
+shoot.src = './assets/sound/blaster.mp3';
 
 const gameSd = new Audio();
-gameSd.src = './assets/sound/Game Over.mp3';
+gameSd.src = './assets/sound/gameOver.mp3';
 gameSd.loop = false;
 
 startBtn.addEventListener('click', (event) => {
